@@ -2,10 +2,10 @@
 #include <fstream>
 #include <regex>
 
-void remove_conditions(std::string in_file, std::string out_file) {
+void remove_conditions(std::string in_file, std::fstream &output) {
 	std::fstream input(in_file, std::ios::in);
-	std::fstream output(out_file, std::ios::out);
-	if (!input || !output) return 1;
+	if (!input) exit(1);
+	std::string fhalf, shalf;
 	std::string buffer;
 	bool status(true);
 	int npos;
@@ -30,12 +30,12 @@ void remove_conditions(std::string in_file, std::string out_file) {
 	}
 
 	input.close();
-	output.close();
 }
 
 int main() {
-	std::fstream input("input_4", std::ios::in);
+	std::fstream input("out_file", std::ios::out);
 	if (!input) return 1;
+	remove_conditions("input_4", input);
 	std::string buffer;
 	int npos, opos;
 	int res(0);
